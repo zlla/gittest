@@ -140,11 +140,12 @@ void xuatFile(SV a[], int n, char Filename[]) {
     FileOut.close();
 }
 
-int xoatheoID(SV a[], int n, int id) {
+int xoatheoID(SV a[], int n, int id, int xoa[],int biendem) {
     int found = 0;
     for (int i = 0; i < n ; i++) {
         if (a[i].id == id) {
             found = 1;
+            xoa[biendem] = a[i].id;
             for (int j = i; j < n; j++) {
                 a[j] = a[j+1];
             }
@@ -226,6 +227,8 @@ int main() {
     int n;
     char Filename[] = "DTN.txt";
     bool daNhap = false;
+    int xoa[1000];
+    int biendem = 0;
 
     n = laychuso("Nhap so luong SV: ");
     SV a[n];
@@ -301,12 +304,13 @@ int main() {
                     }
                     id = laychuso("Nhap ID cua SV can xoa: ");
                     getchar();
-                    if (xoatheoID(a, n , id) == 0) {
-                        std::cout<< "Xoa SV that bai(ID khong ton tai)!!!\n";
+                    if (xoatheoID(a, n , id, xoa, biendem) == 0) {
+                        std::cout<< "Xoa SV that bai(ID khong ton tai)!!!";
                         getchar();
                         break;
                     }
                     else {
+                        biendem++;
                         n--;
                     }
                 }
@@ -359,11 +363,27 @@ int main() {
                             minDS = a[i].id;
                         }
                     }
-
+                    
                     chon = laychuso("Nhap ID sinh vien muon chinh sua: ");
-                    while (chon > maxDS || chon < minDS) {
-                        chon = laychuso("Nhap ID sinh vien muon chinh sua: ");
+                    bool bienchon = false;
+                    for (int i = 0; i < biendem; i++) {
+                        if (chon == xoa[i]) {
+                            std::cout<< "ID da bi xoa,khong the cap nhat";
+                            getchar();
+                            bienchon = true;
+                        }
                     }
+                    if (bienchon) {
+                        getchar();
+                        break;
+                    }
+                    else {
+                        while (chon > maxDS || chon < minDS) {
+                            std::cout<< "ID khong ton tai,vui long nhap lai!\n";
+                            chon = laychuso("Nhap ID sinh vien muon chinh sua: ");
+                        }
+                    }
+
                     getchar();
                     for (int i = 0; i < n; i++) {
                         if (a[i].id == chon) {
