@@ -133,14 +133,14 @@ void xeploaiN(SV a[], int n){
 void xuatFile(SV a[], int n, char Filename[]) {
     ofstream FileOut;
     FileOut.open(Filename, ios_base::out);
-    FileOut << "ID" << std::setw(20) <<"Ho Ten" << std::setw(30) << std::endl << "GT" << std::setw(10) << "Tuoi" << std::setw(10) << "DT" << std::setw(10) << "DL" << std::setw(10) << "DA" << std::setw(10) << "DTB" <<"\n";
+    FileOut << "ID" << std::setw(20) <<"Ho Ten" << std::setw(15) << "GT" << std::setw(10) << "Tuoi" << std::setw(10) << "DT" << std::setw(10) << "DL" << std::setw(10) << "DA" << std::setw(10) << "DTB" <<"\n";
     for (int i = 0; i < n; i++) {
-        FileOut << a[i].id << std::setw(20) << a[i].ten << std::setw(30) << std::endl << a[i].gt << std::setw(10) << a[i].tuoi << std::setw(10) << a[i].dT << std::setw(10) << a[i].dL << std::setw(10) << a[i].dA << std::setw(10) << a[i].dtb <<"\n";
+        FileOut << a[i].id << std::setw(20) << a[i].ten << std::setw(15) << a[i].gt << std::setw(10) << a[i].tuoi << std::setw(10) << a[i].dT << std::setw(10) << a[i].dL << std::setw(10) << a[i].dA << std::setw(10) << a[i].dtb <<"\n";
     }
     FileOut.close();
 }
 
-void xoatheoID(SV a[], int n, int id) {
+int xoatheoID(SV a[], int n, int id) {
     int found = 0;
     for (int i = 0; i < n ; i++) {
         if (a[i].id == id) {
@@ -152,6 +152,14 @@ void xoatheoID(SV a[], int n, int id) {
             break;
         }
     };
+
+    if (found==0) {
+        return 0;
+    }
+    else {
+        return 1;
+    }
+
 }
 
 void capnhatTTSV(SV &sv) {
@@ -200,6 +208,7 @@ void timkiemTheoTen(SV a[], char ten[], int n) {
     int found = 0;
     for (int i = 0; i < n ; i++) {
         strcpy(tenSV, a[i].ten);
+        //strstr la ham tim kiem
         if (strstr(strdup(tenSV), strdup(ten))) {
             dsTimKiem[found] = a[i];
             found++; 
@@ -290,10 +299,16 @@ int main() {
                     for (int i = 0; i < n; i++) {
                         std::cout<< "SV: " << a[i].ten << "  --  " << "ID: " << a[i].id << std:: endl;
                     }
-                    std::cout<< "Nhap ID cua SV can xoa: "; std::cin>> id;
+                    id = laychuso("Nhap ID cua SV can xoa: ");
                     getchar();
-                    xoatheoID(a, n , id);
-                    n--;
+                    if (xoatheoID(a, n , id) == 0) {
+                        std::cout<< "Xoa SV that bai(ID khong ton tai)!!!\n";
+                        getchar();
+                        break;
+                    }
+                    else {
+                        n--;
+                    }
                 }
                 else {
                     std::cout<< "\nVui long nhap danh sach SV truoc!";
