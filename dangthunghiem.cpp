@@ -194,6 +194,24 @@ void capnhatTTSV(SV &sv) {
     }
 }
 
+void timkiemTheoTen(SV a[], char ten[], int n) {
+    SV dsTimKiem[1000];
+    char tenSV[30];
+    int found = 0;
+    for (int i = 0; i < n ; i++) {
+        strcpy(tenSV, a[i].ten);
+        if (strstr(strdup(tenSV), strdup(ten))) {
+            dsTimKiem[found] = a[i];
+            found++; 
+        }
+    }
+    if (found == 0) {
+        std::cout<< "\nKhong ton tai SV da nhap trong he thong\n";
+    }
+    else
+        inNttSV(dsTimKiem, found);
+}
+
 int main() {
     int key;
     int n;
@@ -216,6 +234,7 @@ int main() {
         std::cout<< "|     6. Xep loai sinh vien            |\n";
         std::cout<< "|     7. Cap nhat TTSV theo ID         |\n";
         std::cout<< "|     8. Xuat DS sinh vien             |\n";
+        std::cout<< "|     9. Tim kiem SV theo ten          |\n";
         std::cout<< "|     0. Thoat                         |\n";
         std::cout<< "----------------------------------------\n";
         key = laychuso("---       Nhap lua chon cua ban      ---\n");
@@ -337,6 +356,21 @@ int main() {
                             break;
                         }
                     }
+                }
+                else {
+                    std::cout<< "\nVui long nhap danh sach SV truoc!";
+                }
+                std::cout<< "\nBam phim bat ki de tiep tuc.\n";
+                getchar();
+                break;
+            case 9:
+                if (daNhap) {
+                    std::cout<< "\nBan da chon tim kiem sinh vien theo ten: \n";
+                    char strTen[30];
+                    std::cout<< "Nhap ten de tim kiem: ";
+                    cin.get(strTen, 30);
+                    getchar();
+                    timkiemTheoTen(a, strTen, n);
                 }
                 else {
                     std::cout<< "\nVui long nhap danh sach SV truoc!";
