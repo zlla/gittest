@@ -21,9 +21,9 @@ int laychuso(std::string prompt){
     std::cout<< prompt;
     std::cin>> x;
     while (cin.fail()) {
-        std::cout<< "-----\n";
+        std::cout<< "\n-----\n";
         std::cout<< "* Nhap Sai * \nVui long nhap lai mot chu so !!!\n";
-        std::cout<< "-----\n";
+        std::cout<< "-----";
         std::cin.clear();
         std::cin.ignore(256,'\n');
         std::cout<< endl << prompt;
@@ -347,6 +347,7 @@ int main() {
                 if (daNhap) {
                     int chon;
                     int maxDS, minDS;
+
                     std::cout<< "\nBan da chon cap nhat TTSV: \n";
                     for (int i = 0; i < n; i++) {
                         std::cout<< "SV: " << a[i].ten << "  --  " << "ID: " << a[i].id << std:: endl;
@@ -365,21 +366,10 @@ int main() {
                     }
                     
                     chon = laychuso("Nhap ID sinh vien muon chinh sua: ");
-                    bool bienchon = false;
                     for (int i = 0; i < biendem; i++) {
-                        if (chon == xoa[i]) {
-                            std::cout<< "ID da bi xoa,khong the cap nhat";
+                        while (chon > maxDS || chon < minDS || chon == xoa[i]) {
+                            std::cout<< "ID khong ton tai hoac co the da bi xoa, vui long nhap lai!\n";
                             getchar();
-                            bienchon = true;
-                        }
-                    }
-                    if (bienchon) {
-                        getchar();
-                        break;
-                    }
-                    else {
-                        while (chon > maxDS || chon < minDS) {
-                            std::cout<< "ID khong ton tai,vui long nhap lai!\n";
                             chon = laychuso("Nhap ID sinh vien muon chinh sua: ");
                         }
                     }
