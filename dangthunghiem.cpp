@@ -1,6 +1,6 @@
 #include<iostream>
 #include<string>
-#include <fstream>
+#include<fstream>
 #include<string.h>
 
 using namespace std;
@@ -33,6 +33,17 @@ int laychuso(std::string prompt){
     return x;
 }
 
+int laysotrongkhoang(int max, int min, std::string prompt) {
+    int socantim;
+    socantim = laychuso(prompt);
+    while (socantim < min || socantim > max) {
+        std::cout<< "\n-----\n* Nhap sai *\nVui long nhap lai so trong khoang(" << min << " - " << max << "):\n-----\n";
+        getchar();
+        socantim = laychuso(prompt);
+    }
+    return socantim;
+}
+
 void tinhDTB(SV &sv){
     sv.dtb = (sv.dT + sv.dL + sv.dA) / 3;
 }
@@ -45,9 +56,9 @@ void nhapttSV(SV &sv, int i){
     getchar();
     sv.tuoi = laychuso("Nhap tuoi: ");
     std::cout<< "Nhap diem 3 mon Toan - Ly - Anh\n";
-    sv.dT = laychuso("Toan: ");
-    sv.dL = laychuso("Ly: ");
-    sv.dA = laychuso("Anh ");
+    sv.dT = laysotrongkhoang(10, 1, "Toan: ");
+    sv.dL = laysotrongkhoang(10, 1, "Ly: ");
+    sv.dL = laysotrongkhoang(10, 1, "Anh: ");
     tinhDTB(sv);
     getchar();
 };
