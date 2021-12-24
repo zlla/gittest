@@ -1,7 +1,6 @@
 #include<iostream>
 #include<string>
 #include<fstream>
-#include<string.h>
 
 using namespace std;
 
@@ -58,7 +57,7 @@ void nhapttSV(SV &sv, int i){
     std::cout<< "Nhap diem 3 mon Toan - Ly - Anh\n";
     sv.dT = laysotrongkhoang(10, 1, "Toan: ");
     sv.dL = laysotrongkhoang(10, 1, "Ly: ");
-    sv.dL = laysotrongkhoang(10, 1, "Anh: ");
+    sv.dA = laysotrongkhoang(10, 1, "Anh: ");
     tinhDTB(sv);
     getchar();
 };
@@ -236,7 +235,7 @@ void timkiemTheoTen(SV a[], char ten[], int n) {
 int main() {
     int key;
     int n;
-    char Filename[] = "DTN.txt";
+    char Filename[] = "DSSV.txt";
     bool daNhap = false;
     int xoa[1000];
     int biendem = 0;
@@ -297,7 +296,9 @@ int main() {
             case 4:
                 if (daNhap) {
                     std::cout<< "\nBan da chon sap xep danh sach SV theo Ten: ";
-                    sapxepTheoTen(a, n);
+                    for (int i = 0; i < n; i++) {
+                        sapxepTheoTen(a, n);
+                    }
                     inNttSV(a, n);
                 }
                 else {
@@ -379,7 +380,7 @@ int main() {
                     chon = laychuso("Nhap ID sinh vien muon chinh sua: ");
                     for (int i = 0; i < biendem; i++) {
                         while (chon > maxDS || chon < minDS || chon == xoa[i]) {
-                            std::cout<< "ID khong ton tai hoac co the da bi xoa, vui long nhap lai!\n";
+                            std::cout<< "-----\nID khong ton tai hoac co the da bi xoa\nVui long nhap lai!\n-----\n";
                             getchar();
                             chon = laychuso("Nhap ID sinh vien muon chinh sua: ");
                         }
