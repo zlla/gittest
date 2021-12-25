@@ -135,7 +135,7 @@ void xeploai(SV &sv){
 
 void xeploaiN(SV a[], int n){
     for (int i = 0; i < n; i++) {
-        std::cout<< "\nSinh vien - - " << a[i].ten << " - - xep loai: ";
+        std::cout<< "\nSinh vien: " << a[i].ten << " - - id: " << a[i].id << " - - xep loai: ";
         xeploai(a[i]);
     }
 }
@@ -240,13 +240,15 @@ int main() {
     int xoa[1000];
     int biendem = 0;
 
+    std::cout<< "\n<---------------->\n";
     n = laychuso("Nhap so luong SV: ");
+    std::cout<< "<---------------->\n\n";
     SV a[n];
     getchar();
 
     while(true){
         std::cout<< "----------------------------------------\n";
-        std::cout<< "|    -CHUONG TRINH QUAN LY SINH VIEN-  |\n";
+        std::cout<< "| >> CHUONG TRINH QUAN LY SINH VIEN << |\n";
         std::cout<< "----------------------------------------\n";
         std::cout<< "|     1. Nhap du lieu                  |\n";
         std::cout<< "|     2. Hien thi DS sinh vien         |\n";
@@ -259,7 +261,7 @@ int main() {
         std::cout<< "|     9. Tim kiem SV theo ten          |\n";
         std::cout<< "|     0. Thoat                         |\n";
         std::cout<< "----------------------------------------\n";
-        key = laychuso("---       Nhap lua chon cua ban      ---\n");
+        key = laychuso(">>>      Nhap lua chon cua ban      <<<\n");
         std::cout<< "-----";
         getchar();
         switch(key){
