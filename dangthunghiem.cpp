@@ -380,6 +380,11 @@ int main() {
                     }
                     
                     chon = laychuso("Nhap ID sinh vien muon chinh sua: ");
+                    while (chon > maxDS || chon < minDS) {
+                        std::cout<< "-----\nID khong ton tai hoac co the da bi xoa\nVui long nhap lai!\n-----\n";
+                        getchar();
+                        chon = laychuso("Nhap ID sinh vien muon chinh sua: ");
+                    }
                     for (int i = 0; i < biendem; i++) {
                         while (chon > maxDS || chon < minDS || chon == xoa[i]) {
                             std::cout<< "-----\nID khong ton tai hoac co the da bi xoa\nVui long nhap lai!\n-----\n";
@@ -419,7 +424,7 @@ int main() {
                 break;
             case 0:
                 std::cout<< "\nBan da chon thoat chuong trinh!!!";
-                std::cout<< "\n- - - Cam on ban da su dung - - -";
+                std::cout<< "\n❤ ❤ ❤ Cam on ban da su dung ❤ ❤ ❤";
                 getchar();
                 return 0;
             default:
