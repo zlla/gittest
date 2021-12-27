@@ -1,13 +1,14 @@
 #include<iostream>
 #include<string>
 #include<fstream>
+#include<stdio.h>
 
 using namespace std;
 
 struct Sinhvien{
     int id;
     char ten[30];
-    char gt[5];
+    std::string gt;
     int tuoi;
     float dT, dL, dA;
     float dtb;
@@ -43,16 +44,39 @@ int laysotrongkhoang(int max, int min, std::string prompt) {
     return socantim;
 }
 
+void laygioitinh(SV &sv) {
+    int chon;
+    std::cout<< "Gioi tinh: \n";
+    std::cout<< "1. Nam" << std:: endl;
+    std::cout<< "2. Nu" << std:: endl;
+    chon = laychuso("Nhap lua chon cua ban: ");
+    while (chon < 1 || chon > 2) {
+        std::cout<< "\n-----\n* Nhap sai *\nVui long nhap lai so trong khoang(" << 1 << " - " << 2 << "):\n-----\n";
+        getchar();
+        chon = laychuso("Nhap lua chon cua ban: ");    
+    }
+    if (chon == 1) {
+        sv.gt = "nam";
+    }
+    else if (chon == 2) {
+        sv.gt = "nu";
+    }
+}
+
 void tinhDTB(SV &sv){
     sv.dtb = (sv.dT + sv.dL + sv.dA) / 3;
 }
 
 void nhapttSV(SV &sv, int i){
     sv.id = i + 1;
-    std::cout<< "Nhap ten: "; std::cin.get(sv.ten, 30);
-    getchar();
-    std::cout<< "Nhap gioi tinh: "; std::cin.get(sv.gt, 5);
-    getchar();
+    std::cout<< "Nhap ten: "; std::cin.getline(sv.ten, 30);
+    // while (sv.ten[0] < 65 || sv.ten[0] > 122) {
+    //     std::cout << "-----\n* Ten khong duoc de trong hoac su dung ki tu *\nVui long nhap lai!!!\n-----";
+    //     getchar();
+    //     std::cout << "Nhap ten: ";
+    //     std::cin.getline(sv.ten, 30);
+    // }
+    laygioitinh(sv);
     sv.tuoi = laychuso("Nhap tuoi: ");
     std::cout<< "Nhap diem 3 mon Toan - Ly - Anh\n";
     sv.dT = laysotrongkhoang(10, 1, "Toan: ");
@@ -102,17 +126,10 @@ void sapxepTheoDTB(SV a[], int n){
 
 void sapxepTheoTen(SV a[], int n) {
     SV bien_luu_tru;
-    char tenSV1[30];
-    char tenSV2[30];
-
+    
     for (int i = 0; i < n; i++) {
-        //strcpy la ham copy du lieu sang 1 bien khac
-        strcpy(tenSV1, a[i].ten);
         for (int j = i + 1; j < n; j++) {
-            strcpy(tenSV2, a[j].ten);
-            //strcmp la ham so sanh 2 chuoi
-            //strdup la ham viet hoa
-            if(strcmp(strdup(tenSV1), strdup(tenSV2)) > 0) {
+            if(strcmp(a[i].ten, a[j].ten) > 0) {
                 bien_luu_tru = a[i];
                 a[i] = a[j];
                 a[j] = bien_luu_tru;
@@ -186,13 +203,12 @@ void capnhatTTSV(SV &sv) {
         switch(chon) {
             case 1:
                 std::cout<< "Nhap ten: ";
-                std::cin.get(sv.ten, 30);
+                std::cin.getline(sv.ten, 30);
                 std::cout<< "Cap nhat TTSV thanh cong!!!";
                 getchar();
                 return;
             case 2:
-                std::cout<< "Nhap gioi tinh: ";
-                std::cin.get(sv.gt, 5);
+                laygioitinh(sv);
                 std::cout<< "Cap nhat TTSV thanh cong!!!";
                 getchar();
                 return;
@@ -298,9 +314,7 @@ int main() {
             case 4:
                 if (daNhap) {
                     std::cout<< "\nBan da chon sap xep danh sach SV theo Ten: ";
-                    for (int i = 0; i < n; i++) {
-                        sapxepTheoTen(a, n);
-                    }
+                    sapxepTheoTen(a, n);
                     inNttSV(a, n);
                 }
                 else {
