@@ -143,9 +143,9 @@ void xeploaiN(SV a[], int n){
 void xuatFile(SV a[], int n, char Filename[]) {
     ofstream FileOut;
     FileOut.open(Filename, ios_base::out);
-    FileOut << "ID" << std::setw(20) <<"Ho Ten" << std::setw(15) << "GT" << std::setw(10) << "Tuoi" << std::setw(10) << "DT" << std::setw(10) << "DL" << std::setw(10) << "DA" << std::setw(10) << "DTB" <<"\n";
+    FileOut << std::setw(5) << "ID" << std::setw(25) <<"Ho Ten" << std::setw(10) << "GT" << std::setw(10) << "Tuoi" << std::setw(10) << "DT" << std::setw(10) << "DL" << std::setw(10) << "DA" << std::setw(10) << "DTB" <<"\n";
     for (int i = 0; i < n; i++) {
-        FileOut << a[i].id << std::setw(20) << a[i].ten << std::setw(15) << a[i].gt << std::setw(10) << a[i].tuoi << std::setw(10) << a[i].dT << std::setw(10) << a[i].dL << std::setw(10) << a[i].dA << std::setw(10) << a[i].dtb <<"\n";
+        FileOut << std::setw(5) << a[i].id << std::setw(25) << a[i].ten << std::setw(10) << a[i].gt << std::setw(10) << a[i].tuoi << std::setw(10) << a[i].dT << std::setw(10) << a[i].dL << std::setw(10) << a[i].dA << std::setw(10) << a[i].dtb <<"\n";
     }
     FileOut.close();
 }
