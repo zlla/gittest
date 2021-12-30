@@ -1,7 +1,6 @@
 #include<iostream>
 #include<string>
 #include<fstream>
-#include<stdio.h>
 
 using namespace std;
 
@@ -49,12 +48,7 @@ void laygioitinh(SV &sv) {
     std::cout<< "Gioi tinh: \n";
     std::cout<< "1. Nam" << std:: endl;
     std::cout<< "2. Nu" << std:: endl;
-    chon = laychuso("Nhap lua chon cua ban: ");
-    while (chon < 1 || chon > 2) {
-        std::cout<< "\n-----\n* Nhap sai *\nVui long nhap lai so trong khoang(" << 1 << " - " << 2 << "):\n-----\n";
-        getchar();
-        chon = laychuso("Nhap lua chon cua ban: ");    
-    }
+    chon = laysotrongkhoang(2, 1, "Nhap lua chon cua ban: ");
     if (chon == 1) {
         sv.gt = "nam";
     }
@@ -70,12 +64,6 @@ void tinhDTB(SV &sv){
 void nhapttSV(SV &sv, int i){
     sv.id = i + 1;
     std::cout<< "Nhap ten: "; std::cin.getline(sv.ten, 30);
-    // while (sv.ten[0] < 65 || sv.ten[0] > 122) {
-    //     std::cout << "-----\n* Ten khong duoc de trong hoac su dung ki tu *\nVui long nhap lai!!!\n-----";
-    //     getchar();
-    //     std::cout << "Nhap ten: ";
-    //     std::cin.getline(sv.ten, 30);
-    // }
     laygioitinh(sv);
     sv.tuoi = laychuso("Nhap tuoi: ");
     std::cout<< "Nhap diem 3 mon Toan - Ly - Anh\n";
@@ -126,7 +114,6 @@ void sapxepTheoDTB(SV a[], int n){
 
 void sapxepTheoTen(SV a[], int n) {
     SV bien_luu_tru;
-    
     for (int i = 0; i < n; i++) {
         for (int j = i + 1; j < n; j++) {
             if(strcmp(a[i].ten, a[j].ten) > 0) {
@@ -187,7 +174,6 @@ int xoatheoID(SV a[], int n, int id, int xoa[],int biendem) {
     else {
         return 1;
     }
-
 }
 
 void capnhatTTSV(SV &sv) {
