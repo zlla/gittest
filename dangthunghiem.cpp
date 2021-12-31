@@ -46,14 +46,20 @@ int laysotrongkhoang(int max, int min, std::string prompt) {
 void laygioitinh(SV &sv) {
     int chon;
     std::cout<< "Gioi tinh: \n";
-    std::cout<< "1. Nam" << std:: endl;
-    std::cout<< "2. Nu" << std:: endl;
+    std::cout<< "Nam - chon so 1" << std:: endl;
+    std::cout<< "Nu  - chon so 2" << std:: endl;
+    std::cout<< "+-----------------------------------------------------+\n";
+    std::cout<< "| Thang lap trinh cuc ki ki thi gioi tinh thu 3       |\n";
+    std::cout<< "| Nen khong co dau, dung thu mat cong, thanks you!!!  |\n";
+    std::cout<< "+-----------------------------------------------------+\n";
     chon = laysotrongkhoang(2, 1, "Nhap lua chon cua ban: ");
     if (chon == 1) {
         sv.gt = "nam";
+        return;
     }
     else if (chon == 2) {
         sv.gt = "nu";
+        return;
     }
 }
 
@@ -82,21 +88,25 @@ void nhapNttSV(SV a[] ,int n){
 }
 
 void inttSV(SV &sv){
-    std::cout<< "ID: " << sv.id << std::endl;
-    std::cout<< "Ho ten SV: " << sv.ten << std:: endl;
-    std::cout<< "Gioi tinh: " << sv.gt << std:: endl;
-    std::cout<< "Tuoi: " << sv.tuoi << std:: endl;
-    std::cout<< "Diem Toan - Ly - Anh: " << sv.dT << " - " << sv.dL << " - " << sv.dA << std:: endl;
-    std::cout<< "Diem trung binh: " << sv.dtb << std:: endl;
+    std::cout<< "|" << setw(3) << sv.id << setw(3) << "|";
+    std::cout<< setw(20) << sv.ten << setw(5) << "|";
+    std::cout<< setw(10) << sv.gt << setw(2) << "|";
+    std::cout<< setw(6) << sv.tuoi << setw(3) << "|";
+    std::cout<< setw(5) << sv.dT << setw(3) << "|" << setw(5) << sv.dL << setw(3) << "|" << setw(5) << sv.dA << setw(3) << "|";
+    std::cout<< setw(10) << sv.dtb << setw(3) << "|" << std:: endl;
 }
 
 void inNttSV(SV a[], int n){
-    std::cout<< "\n-----";
+    std::cout<< "\n+-----+------------------------+-----------+--------+-------+-------+-------+------------+\n";
+    std::cout<< "|" << setw(3) << "ID" << setw(3) << "|" << setw(20) << "Ho Ten     " << setw(5) << "|";
+    std::cout<< setw(10) << "Gioi tinh" << setw(2) << "|" << setw(6) << " Tuoi" << setw(3) << "|";
+    std::cout<< setw(5) << "Toan" << setw(3) << "|" << setw(5) << "Ly" << setw(3) << "|";
+    std::cout<< setw(5) << "Anh" << setw(3) << "|" << setw(10) << "DTB  " << setw(3) << "|";
+    std::cout<< "\n+-----+------------------------+-----------+--------+-------+-------+-------+------------+\n";
     for (int i = 0; i < n; i++) {
-        std::cout<<"\nThong tin cua sinh vien thu: " << i+1 << std:: endl;;
         inttSV(a[i]);
     }
-    std::cout<< "-----\n";
+    std::cout<< "+-----+------------------------+-----------+--------+-------+-------+-------+------------+\n";
 }
 
 void sapxepTheoDTB(SV a[], int n){
@@ -249,9 +259,9 @@ int main() {
     getchar();
 
     while(true){
-        std::cout<< "----------------------------------------\n";
+        std::cout<< "+--------------------------------------+\n";
         std::cout<< "| >> CHUONG TRINH QUAN LY SINH VIEN << |\n";
-        std::cout<< "----------------------------------------\n";
+        std::cout<< "+--------------------------------------+\n";
         std::cout<< "|     1. Nhap du lieu                  |\n";
         std::cout<< "|     2. Hien thi DS sinh vien         |\n";
         std::cout<< "|     3. Sap xep sinh vien theo DTB    |\n";
@@ -262,7 +272,8 @@ int main() {
         std::cout<< "|     8. Xuat DS sinh vien             |\n";
         std::cout<< "|     9. Tim kiem SV theo ten          |\n";
         std::cout<< "|     0. Thoat                         |\n";
-        std::cout<< "----------------------------------------\n";
+        std::cout<< "+--------------------------------------+\n";
+        std::cout<< "<-------------------------------------->\n";
         key = laychuso(">>>      Nhap lua chon cua ban      <<<\n");
         std::cout<< "-----";
         getchar();
@@ -412,8 +423,7 @@ int main() {
                     std::cout<< "\nBan da chon tim kiem sinh vien theo ten: \n";
                     char strTen[30];
                     std::cout<< "Nhap ten de tim kiem: ";
-                    cin.get(strTen, 30);
-                    getchar();
+                    cin.getline(strTen, 30);
                     timkiemTheoTen(a, strTen, n);
                 }
                 else {
