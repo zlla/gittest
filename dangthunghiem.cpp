@@ -83,9 +83,7 @@ void nhapttSV(SV &sv, int i){
 void nhapNttSV(SV a[] ,int n){
     for(int i = 0; i < n; i++){
         std::cout<< "\nNhap sinh vien thu: " << i+1 << std::endl;
-        nhapttSV(a[i], i);
-    }
-}
+        nhapttSV(a[i], i); } }
 
 void inttSV(SV &sv){
     std::cout<< "|" << setw(3) << sv.id << setw(3) << "|";
