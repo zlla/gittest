@@ -1,3 +1,4 @@
+#include <cstdio>
 #include<iostream>
 #include<string>
 #include<fstream>
@@ -255,22 +256,22 @@ int main() {
         std::cout<< "+--------------------------------------+\n";
         std::cout<< "| >> CHUONG TRINH QUAN LY SINH VIEN << |\n";
         std::cout<< "+--------------------------------------+\n";
-        std::cout<< "|     01. Nhap du lieu                 |\n";
-        std::cout<< "|     02. Hien thi DS sinh vien        |\n";
-        std::cout<< "|     03. Sap xep sinh vien theo DTB   |\n";
-        std::cout<< "|     04. Sap xep sinh vien theo Ten   |\n";
-        std::cout<< "|     05. Xoa SV theo ID               |\n";
-        std::cout<< "|     06. Xep loai sinh vien           |\n";
-        std::cout<< "|     07. Cap nhat TTSV theo ID        |\n";
-        std::cout<< "|     08. Xuat DS sinh vien            |\n";
-        std::cout<< "|     09. Tim kiem SV theo ten         |\n";
-        std::cout<< "|     10. Them sinh vien vao ds        |\n";
-        std::cout<< "|     00. Thoat chuong trinh           |\n";
+        std::cout<< "|     1.  Nhap du lieu                 |\n";
+        std::cout<< "|     2.  Hien thi DS sinh vien        |\n";
+        std::cout<< "|     3.  Sap xep sinh vien            |\n";
+        std::cout<< "|     4.  Xep loai sinh vien           |\n";
+        std::cout<< "|     5.  Cap nhat TTSV theo ID        |\n";
+        std::cout<< "|     6.  Tim kiem SV theo ten         |\n";
+        std::cout<< "|     7.  Them sinh vien vao ds        |\n";
+        std::cout<< "|     8.  Xoa SV theo ID               |\n";
+        std::cout<< "|     9.  Xuat DS sinh vien            |\n";
+        std::cout<< "|     0.  Thoat chuong trinh           |\n";
         std::cout<< "+--------------------------------------+\n";
         std::cout<< "<-------------------------------------->\n";
         key = laychuso(">>>      Nhap lua chon cua ban      <<<\n");
         std::cout<< "-----";
         getchar();
+
         switch(key){
             case 1:
                 std::cout<< "\nBan da chon nhap danh sach SV: ";
@@ -296,9 +297,22 @@ int main() {
                 break;
             case 3:
                 if (daNhap) {
-                    std::cout<< "\nBan da chon sap xep danh sach SV: ";
-                    sapxepTheoDTB(a, n);
-                    inNttSV(a, n);
+                    std::cout<< "\nBan da chon sap xep danh sach: \n";
+                    std::cout<< "Chon kieu sap xep: \n";
+                    std::cout<< "1. Sap xep theo DTB\n";
+                    std::cout<< "2. Sap xep theo Ten\n";
+                    int choice = laysotrongkhoang(2, 1, "\nLua chon cua ban: ");
+                    getchar();
+                    if (choice == 1) {
+                        std::cout<< "\nBan da chon sap xep danh sach SV theo DTB: ";
+                        sapxepTheoDTB(a, n);
+                        inNttSV(a, n);
+                    }
+                    else if(choice == 2) {
+                        std::cout<< "\nBan da chon sap xep danh sach SV theo Ten: ";
+                        sapxepTheoTen(a, n);
+                        inNttSV(a, n);
+                    }
                 }
                 else {
                     std::cout<< "\nVui long nhap danh sach SV truoc!";
@@ -307,43 +321,6 @@ int main() {
                 getchar();
                 break;
             case 4:
-                if (daNhap) {
-                    std::cout<< "\nBan da chon sap xep danh sach SV theo Ten: ";
-                    sapxepTheoTen(a, n);
-                    inNttSV(a, n);
-                }
-                else {
-                    std::cout<< "\nVui long nhap danh sach SV truoc!";
-                }
-                std::cout<< "\nBam phim bat ki de tiep tuc.\n";
-                getchar();
-                break;
-            case 5:
-                if (daNhap) {
-                    int id;
-                    std::cout<< "\n Ban da chon xoa SV theo ID: \n";
-                    for (int i = 0; i < n; i++) {
-                        std::cout<< "SV: " << a[i].ten << "  --  " << "ID: " << a[i].id << std:: endl;
-                    }
-                    id = laychuso("Nhap ID cua SV can xoa: ");
-                    getchar();
-                    if (xoatheoID(a, n , id, xoa, biendem) == 0) {
-                        std::cout<< "Xoa SV that bai(ID khong ton tai)!!!";
-                        getchar();
-                        break;
-                    }
-                    else {
-                        biendem++;
-                        n--;
-                    }
-                }
-                else {
-                    std::cout<< "\nVui long nhap danh sach SV truoc!";
-                }
-                std::cout<< "\nBam phim bat ki de tiep tuc.\n";
-                getchar();
-                break;
-            case 6:
                 if (daNhap) {
                     std::cout<< "\nBan da chon xep loai SV: ";
                     xeploaiN(a, n);
@@ -354,19 +331,7 @@ int main() {
                 std::cout<< "\nBam phim bat ki de tiep tuc.\n";
                 getchar();
                 break;
-            case 8:
-                if (daNhap) {
-                    std::cout<< "\nBan da chon xuat danh sach SV ra file txt: ";
-                    xuatFile(a, n, Filename);
-                    std::cout<< "\nXuat DSSV thanh cong!!!";
-                }
-                else {
-                    std::cout<< "\nVui long nhap danh sach SV truoc!";
-                }
-                std::cout<< "\nBam phim bat ki de tiep tuc.\n";
-                getchar();
-                break;
-            case 7:
+            case 5:
                 if (daNhap) {
                     int chon;
                     int maxDS, minDS;
@@ -401,8 +366,8 @@ int main() {
                             chon = laychuso("Nhap ID sinh vien muon chinh sua: ");
                         }
                     }
-
                     getchar();
+
                     for (int i = 0; i < n; i++) {
                         if (a[i].id == chon) {
                             capnhatTTSV(a[i]);
@@ -416,7 +381,7 @@ int main() {
                 std::cout<< "\nBam phim bat ki de tiep tuc.\n";
                 getchar();
                 break;
-            case 9:
+            case 6:
                 if (daNhap) {
                     std::cout<< "\nBan da chon tim kiem sinh vien theo ten: \n";
                     char strTen[30];
@@ -430,12 +395,7 @@ int main() {
                 std::cout<< "\nBam phim bat ki de tiep tuc.\n";
                 getchar();
                 break;
-            case 0:
-                std::cout<< "\nBan da chon thoat chuong trinh!!!";
-                std::cout<< "\n❤ ❤ ❤ Cam on ban da su dung ❤ ❤ ❤";
-                getchar();
-                return 0;
-            case 10:
+            case 7:
                 if (daNhap) {
                     std::cout<< "\nBan da chon them sinh vien: \n";
                     std::cout<< "Nhap thong tin sinh vien can them\n";
@@ -455,6 +415,48 @@ int main() {
                 std::cout<< "\nBam phim bat ki de tiep tuc.\n";
                 getchar();
                 break;
+            case 8:
+                if (daNhap) {
+                    int id;
+                    std::cout<< "\n Ban da chon xoa SV theo ID: \n";
+                    for (int i = 0; i < n; i++) {
+                        std::cout<< "SV: " << a[i].ten << "  --  " << "ID: " << a[i].id << std:: endl;
+                    }
+                    id = laychuso("Nhap ID cua SV can xoa: ");
+                    getchar();
+                    if (xoatheoID(a, n , id, xoa, biendem) == 0) {
+                        std::cout<< "Xoa SV that bai(ID khong ton tai)!!!";
+                        getchar();
+                        break;
+                    }
+                    else {
+                        biendem++;
+                        n--;
+                    }
+                }
+                else {
+                    std::cout<< "\nVui long nhap danh sach SV truoc!";
+                }
+                std::cout<< "\nBam phim bat ki de tiep tuc.\n";
+                getchar();
+                break;
+            case 9:
+                if (daNhap) {
+                    std::cout<< "\nBan da chon xuat danh sach SV ra file txt: ";
+                    xuatFile(a, n, Filename);
+                    std::cout<< "\nXuat DSSV thanh cong!!!";
+                }
+                else {
+                    std::cout<< "\nVui long nhap danh sach SV truoc!";
+                }
+                std::cout<< "\nBam phim bat ki de tiep tuc.\n";
+                getchar();
+                break;
+            case 0:
+                std::cout<< "\nBan da chon thoat chuong trinh!!!";
+                std::cout<< "\n❤ Cam on ban da su dung ❤";
+                getchar();
+                return 0;
             default:
                 std::cout<< "\nKhong co chuc nang nay, hay thu lai!!";
                 std::cout<< "\nBam phim bat ki de tiep tuc.\n";
