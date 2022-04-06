@@ -1,5 +1,6 @@
 #include <cstdio>
 #include <iomanip>
+#include <ios>
 #include<iostream>
 #include<string>
 #include<fstream>
@@ -45,6 +46,19 @@ int laysotrongkhoang(int max, int min, std::string prompt) {
     return socantim;
 }
 
+float laydiem(int max, int min, std::string prompt) {
+    float socantim;
+    std::cout<< prompt;
+    std::cin>> socantim;
+    while (socantim < min || socantim > max) {
+        std::cout<< "\n-----\n* Nhap sai *\nVui long nhap lai so trong khoang(" << min << " - " << max << "):\n-----\n";
+        getchar();   
+        std::cout<< prompt;
+        std::cin>> socantim;
+    }
+    return socantim;
+}
+
 void laygioitinh(SV &sv) {
     int chon;
     std::cout<< "Gioi tinh: \n";
@@ -73,9 +87,9 @@ void nhapttSV(SV &sv, int i){
     laygioitinh(sv);
     sv.tuoi = laychuso("Nhap tuoi: ");
     std::cout<< "Nhap diem 3 mon Toan - Ly - Anh\n";
-    sv.dT = laysotrongkhoang(10, 1, "Toan: ");
-    sv.dL = laysotrongkhoang(10, 1, "Ly: ");
-    sv.dA = laysotrongkhoang(10, 1, "Anh: ");
+    sv.dT = laydiem(10, 1, "Toan: ");
+    sv.dL = laydiem(10, 1, "Ly: ");
+    sv.dA = laydiem(10, 1, "Anh: ");
     tinhDTB(sv);
     getchar();
 };
@@ -91,7 +105,7 @@ void inttSV(SV &sv){
     std::cout<< setw(10) << sv.gt << setw(2) << "|";
     std::cout<< setw(6) << sv.tuoi << setw(3) << "|";
     std::cout<< setw(5) << sv.dT << setw(3) << "|" << setw(5) << sv.dL << setw(3) << "|" << setw(5) << sv.dA << setw(3) << "|";
-    std::cout<< setw(10) << sv.dtb << setw(3) << "|" << std:: endl;
+    std::cout<< setw(10) << setprecision(1)<< fixed << sv.dtb << setw(3) << "|" << std:: endl;
 }
 
 void inNttSV(SV a[], int n){
