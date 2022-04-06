@@ -18,7 +18,7 @@ struct Sinhvien{
 
 typedef Sinhvien SV;
 
-int laychuso(std::string prompt){
+int layso_int(std::string prompt){
     int x;
     std::cout<< prompt;
     std::cin>> x;
@@ -35,26 +35,41 @@ int laychuso(std::string prompt){
     return x;
 }
 
-int laysotrongkhoang(int max, int min, std::string prompt) {
+float layso_float(std::string prompt){
+    float x;
+    std::cout<< prompt;
+    std::cin>> x;
+    while (cin.fail()) {
+        std::cout<< "\n-----\n";
+        std::cout<< "* Nhap Sai * \nVui long nhap lai mot chu so !!!\n";
+        std::cout<< "-----";
+        std::cin.clear();
+        std::cin.ignore(256,'\n');
+        std::cout<< endl << prompt;
+        std::cin>> x;
+        std::cout<< endl;
+    }
+    return x;
+}
+
+int lay_int_trongkhoang(int max, int min, std::string prompt) {
     int socantim;
-    socantim = laychuso(prompt);
+    socantim = layso_int(prompt);
     while (socantim < min || socantim > max) {
         std::cout<< "\n-----\n* Nhap sai *\nVui long nhap lai so trong khoang(" << min << " - " << max << "):\n-----\n";
         getchar();
-        socantim = laychuso(prompt);
+        socantim = layso_int(prompt);
     }
     return socantim;
 }
 
-float laydiem(int max, int min, std::string prompt) {
+float lay_float_trongkhoang(int max, int min, std::string prompt) {
     float socantim;
-    std::cout<< prompt;
-    std::cin>> socantim;
+    socantim = layso_float(prompt);
     while (socantim < min || socantim > max) {
         std::cout<< "\n-----\n* Nhap sai *\nVui long nhap lai so trong khoang(" << min << " - " << max << "):\n-----\n";
-        getchar();   
-        std::cout<< prompt;
-        std::cin>> socantim;
+        getchar();
+        socantim = layso_float(prompt);
     }
     return socantim;
 }
@@ -68,7 +83,7 @@ void laygioitinh(SV &sv) {
     std::cout<< "| Thang viet chuong trinh nay rat ki thi gioi tinh thu 3.  |\n";
     std::cout<< "| Nen khong co dau, dung nhap thu mat cong, cam_on^^       |\n";
     std::cout<< "+----------------------------------------------------------+\n";
-    chon = laysotrongkhoang(2, 1, "Nhap lua chon cua ban: ");
+    chon = lay_int_trongkhoang(2, 1, "Nhap lua chon cua ban: ");
     if (chon == 1) {
         sv.gt = "nam";
     }
@@ -85,11 +100,11 @@ void nhapttSV(SV &sv, int i){
     sv.id = i + 1;
     std::cout<< "Nhap ten: "; std::cin.getline(sv.ten, 30);
     laygioitinh(sv);
-    sv.tuoi = laychuso("Nhap tuoi: ");
+    sv.tuoi = layso_int("Nhap tuoi: ");
     std::cout<< "Nhap diem 3 mon Toan - Ly - Anh\n";
-    sv.dT = laydiem(10, 1, "Toan: ");
-    sv.dL = laydiem(10, 1, "Ly: ");
-    sv.dA = laydiem(10, 1, "Anh: ");
+    sv.dT = lay_float_trongkhoang(10, 1, "Toan: ");
+    sv.dL = lay_float_trongkhoang(10, 1, "Ly: ");
+    sv.dA = lay_float_trongkhoang(10, 1, "Anh: ");
     tinhDTB(sv);
     getchar();
 };
@@ -221,7 +236,7 @@ void capnhatTTSV(SV &sv) {
         std::cout<< "2. Gioi tinh: \n";
         std::cout<< "3. Tuoi: \n";
         std::cout<< "0. Quay lai\n";
-        chon = laychuso("CHon TT muon cap nhat(1-3): ");
+        chon = layso_int("CHon TT muon cap nhat(1-3): ");
         getchar();
         switch(chon) {
             case 1:
@@ -236,7 +251,7 @@ void capnhatTTSV(SV &sv) {
                 getchar();
                 return;
             case 3:
-                sv.tuoi = laychuso("Nhap tuoi: ");
+                sv.tuoi = layso_int("Nhap tuoi: ");
                 std::cout<< "Cap nhat TTSV thanh cong!!!";
                 getchar();
                 return;
@@ -296,7 +311,7 @@ int main() {
         std::cout<< "|     0.  Thoat chuong trinh           |\n";
         std::cout<< "+--------------------------------------+\n";
         std::cout<< "<-------------------------------------->\n";
-        key = laychuso(">>>      Nhap lua chon cua ban      <<<\n");
+        key = layso_int(">>>      Nhap lua chon cua ban      <<<\n");
         std::cout<< "-----";
         getchar();
 
@@ -304,7 +319,7 @@ int main() {
             case 1:
                 std::cout<< "\nBan da chon nhap danh sach SV: ";
                 std::cout<< "\n<---------------->\n";
-                n = laychuso("Nhap so luong SV: ");
+                n = layso_int("Nhap so luong SV: ");
                 std::cout<< "<---------------->\n\n";
                 getchar();
                 nhapNttSV(a, n);
@@ -330,7 +345,7 @@ int main() {
                     std::cout<< "1. Sap xep theo DTB tang dan\n";
                     std::cout<< "2. Sap xep theo DTB giam dan\n";
                     std::cout<< "3. Sap xep theo Ten\n";
-                    int choice = laysotrongkhoang(3, 1, "\nLua chon cua ban: ");
+                    int choice = lay_int_trongkhoang(3, 1, "\nLua chon cua ban: ");
                     getchar();
                     if (choice == 1) {
                         std::cout<< "\nBan da chon sap xep danh sach SV theo DTB tang dan: ";
@@ -387,17 +402,17 @@ int main() {
                         }
                     }
                     
-                    chon = laychuso("Nhap ID sinh vien muon chinh sua: ");
+                    chon = layso_int("Nhap ID sinh vien muon chinh sua: ");
                     while (chon > maxDS || chon < minDS) {
                         std::cout<< "-----\nID khong ton tai hoac co the da bi xoa\nVui long nhap lai!\n-----\n";
                         getchar();
-                        chon = laychuso("Nhap ID sinh vien muon chinh sua: ");
+                        chon = layso_int("Nhap ID sinh vien muon chinh sua: ");
                     }
                     for (int i = 0; i < biendem; i++) {
                         while (chon > maxDS || chon < minDS || chon == xoa[i]) {
                             std::cout<< "-----\nID khong ton tai hoac co the da bi xoa\nVui long nhap lai!\n-----\n";
                             getchar();
-                            chon = laychuso("Nhap ID sinh vien muon chinh sua: ");
+                            chon = layso_int("Nhap ID sinh vien muon chinh sua: ");
                         }
                     }
                     getchar();
@@ -456,7 +471,7 @@ int main() {
                     for (int i = 0; i < n; i++) {
                         std::cout<< "SV: " << a[i].ten << "  --  " << "ID: " << a[i].id << std:: endl;
                     }
-                    id = laychuso("Nhap ID cua SV can xoa: ");
+                    id = layso_int("Nhap ID cua SV can xoa: ");
                     getchar();
                     if (xoatheoID(a, n , id, xoa, biendem) == 0) {
                         std::cout<< "Xoa SV that bai(ID khong ton tai)!!!";
