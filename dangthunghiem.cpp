@@ -1,4 +1,5 @@
 #include <cstdio>
+#include <iomanip>
 #include<iostream>
 #include<string>
 #include<fstream>
@@ -51,16 +52,14 @@ void laygioitinh(SV &sv) {
     std::cout<< "Nu  - chon so 2" << std:: endl;
     std::cout<< "+----------------------------------------------------------+\n";
     std::cout<< "| Thang viet chuong trinh nay rat ki thi gioi tinh thu 3.  |\n";
-    std::cout<< "| Nen khong co dau, dung thu mat cong, thanks you!!!       |\n";
+    std::cout<< "| Nen khong co dau, dung nhap thu mat cong, cam_on^^       |\n";
     std::cout<< "+----------------------------------------------------------+\n";
     chon = laysotrongkhoang(2, 1, "Nhap lua chon cua ban: ");
     if (chon == 1) {
         sv.gt = "nam";
-        return;
     }
     else if (chon == 2) {
         sv.gt = "nu";
-        return;
     }
 }
 
@@ -108,7 +107,7 @@ void inNttSV(SV a[], int n){
     std::cout<< "+-----+------------------------+-----------+--------+-------+-------+-------+------------+\n";
 }
 
-void sapxepTheoDTB(SV a[], int n){
+void sapxepTheoDTBtangdan(SV a[], int n){
     SV max;
     for (int i = 0; i < n; i++) {
         for (int j = i+1; j < n; j++) {
@@ -116,6 +115,19 @@ void sapxepTheoDTB(SV a[], int n){
                 max = a[i];
                 a[i] = a[j];
                 a[j] = max;
+            }
+        }
+    }
+}
+
+void sapxepTheoDTBgiamdan(SV a[], int n){
+    SV min;
+    for (int i = 0; i < n; i++) {
+        for (int j = i+1; j < n; j++) {
+            if(a[i].dtb < a[j].dtb){
+                min = a[i];
+                a[i] = a[j];
+                a[j] = min;
             }
         }
     }
@@ -136,20 +148,22 @@ void sapxepTheoTen(SV a[], int n) {
 
 void xeploai(SV &sv){
     if (sv.dtb >= 8) {
-        std::cout << "Gioi";
+        std::cout << std::setw(10) << "Gioi" << " || ";
     }
     else if (sv.dtb >= 6.5) {
-        std::cout << "Kha";
+        std::cout << std::setw(10) << "Kha" << " || ";
     }
     else {
-        std::cout << "Trung binh";
+        std::cout << std::setw(10) << "Trung binh" << " || ";
     }
 }
 
 void xeploaiN(SV a[], int n){
+    std::cout<< "\n++-----------------------------------------------------------------------++";
     for (int i = 0; i < n; i++) {
-        std::cout<< "\nSinh vien: " << a[i].ten << " - - id: " << a[i].id << " - - xep loai: ";
+        std::cout<< std::endl << "|| Sinh vien: " << std::setw(25) << a[i].ten << std::setw(5) << " || id: " << a[i].id << std::setw(5) << " || xep loai: ";
         xeploai(a[i]);
+    std::cout<< "\n++-----------------------------------------------------------------------++";
     }
 }
 
@@ -299,16 +313,22 @@ int main() {
                 if (daNhap) {
                     std::cout<< "\nBan da chon sap xep danh sach: \n";
                     std::cout<< "Chon kieu sap xep: \n";
-                    std::cout<< "1. Sap xep theo DTB\n";
-                    std::cout<< "2. Sap xep theo Ten\n";
-                    int choice = laysotrongkhoang(2, 1, "\nLua chon cua ban: ");
+                    std::cout<< "1. Sap xep theo DTB tang dan\n";
+                    std::cout<< "2. Sap xep theo DTB giam dan\n";
+                    std::cout<< "3. Sap xep theo Ten\n";
+                    int choice = laysotrongkhoang(3, 1, "\nLua chon cua ban: ");
                     getchar();
                     if (choice == 1) {
-                        std::cout<< "\nBan da chon sap xep danh sach SV theo DTB: ";
-                        sapxepTheoDTB(a, n);
+                        std::cout<< "\nBan da chon sap xep danh sach SV theo DTB tang dan: ";
+                        sapxepTheoDTBtangdan(a, n);
                         inNttSV(a, n);
                     }
                     else if(choice == 2) {
+                        std::cout<< "\nBan da chon sap xep danh sach SV theo DTB giam dan: ";
+                        sapxepTheoDTBgiamdan(a, n);
+                        inNttSV(a, n);
+                    }
+                    else if(choice == 3) {
                         std::cout<< "\nBan da chon sap xep danh sach SV theo Ten: ";
                         sapxepTheoTen(a, n);
                         inNttSV(a, n);
