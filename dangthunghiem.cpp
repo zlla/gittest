@@ -230,13 +230,15 @@ int xoatheoID(SV a[], int n, int id, int xoa[],int biendem) {
 
 void capnhatTTSV(SV &sv) {
     int chon;
+    std::cout<< "\n----------\n";
+    std::cout<< "Ban da chon cap nhat thong tin cua sinh vien co ID: " << sv.id << std::endl;
     while(true) {
-        std::cout<< "\n-----\n";
-        std::cout<< "1. Ten: \n";
-        std::cout<< "2. Gioi tinh: \n";
-        std::cout<< "3. Tuoi: \n";
-        std::cout<< "0. Quay lai\n";
-        chon = layso_int("CHon TT muon cap nhat(1-3): ");
+        std::cout<< "Thong tin ban muon cap nhat: \n";
+        std::cout<< "1. Ten \n";
+        std::cout<< "2. Gioi tinh \n";
+        std::cout<< "3. Tuoi \n";
+        std::cout<< "0. Quay lai\n\n";
+        chon = layso_int("Vui long nhap lua chon cua ban (1-3): ");
         getchar();
         switch(chon) {
             case 1:
@@ -273,8 +275,7 @@ void timkiemTheoTen(SV a[], char ten[], int n) {
     int found = 0;
     for (int i = 0; i < n ; i++) {
         strcpy(tenSV, a[i].ten);
-        //strstr la ham tim kiem
-        if (strstr(strdup(tenSV), strdup(ten))) {
+        if (strstr(strdup(tenSV), strdup(ten))) { //strstr la ham tim kiem
             dsTimKiem[found] = a[i];
             found++; 
         }
@@ -387,7 +388,7 @@ int main() {
 
                     std::cout<< "\nBan da chon cap nhat TTSV: \n";
                     for (int i = 0; i < n; i++) {
-                        std::cout<< "SV: " << a[i].ten << "  --  " << "ID: " << a[i].id << std:: endl;
+                        std::cout<< "SV: " << std::setw(20) << a[i].ten << std::setw(5) << "  ||  " << "ID: " << a[i].id << std:: endl;
                     }
 
                     minDS = maxDS = a[0].id;
